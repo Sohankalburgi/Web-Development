@@ -1,0 +1,74 @@
+/* *{
+    background-color: yellowgreen;
+} */
+/* This is * which used to select all the tags */
+
+/* this is used to select mulitple tags */
+h1,h2{
+    color: red;
+}
+
+button{
+    font-size: 20px;
+    background-color: palegreen;
+}
+
+#signup {
+    background-color: blue;
+    color: red;
+    font-weight: bolder;
+}
+
+/* span{
+    color: yellow;
+} */
+
+.select{
+    background-color: blue;
+}
+/* this is the class select which can be accessed by .  */
+
+/* this is the descendant selector */
+nav a{
+    color: red;
+}
+
+/* the adjacent selector */
+h2 + button{
+    background-color: magenta;
+}
+
+/* Direct Descendant  */
+footer > a{
+    color: green;
+}
+
+/* Attribute selector */
+input[type="password"]{
+    color: aqua;
+}
+/* Pseudo class */
+button:hover{
+    background-color: red;
+    color: white;
+}
+
+/* Pseudo Elements */
+h2::first-letter{
+    font-size:50px;
+    color: green;
+}
+
+.demo::first-line{
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.demo::selection{
+    background-color: yellow;
+}
+
+h2{
+    /* this is use to increase the specificityr */
+    color: greenyellow !important;
+}

@@ -1,0 +1,15 @@
+/* h1 is the block property */
+h1{
+    background-color: palegoldenrod;
+    border: 2px solid black;
+    display:inline;
+}
+
+/* span is the inline property  */
+span{
+    background-color: aqua;
+    border: 2px solid black;
+    margin: 2px;
+    padding:1px;
+    display: block;
+}
