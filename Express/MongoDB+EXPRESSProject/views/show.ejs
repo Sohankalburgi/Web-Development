@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>findProduct</title>
+</head>
+<body>
+    <h3>The Product OF ID : <%= foundProduct.id  %></h1>
+    
+    <ul>
+        <li>Product Name : <%= foundProduct.name  %></li>
+        <li>Product Price : <%= foundProduct.price  %></li>
+        <li>Product Category : <a href="/products?categories=<%=foundProduct.categories%>"><%= foundProduct.categories %></a></li>
+    </ul>
+    <form action="/products/<%= foundProduct.id%>?_method=DELETE" method="POST">
+        <button type="submit">Delete</button>
+    </form>
+    <a href="/products">ALL PRODUCTS</a>
+</body>
+</html>
