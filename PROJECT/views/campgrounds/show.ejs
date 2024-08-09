@@ -1,34 +1,81 @@
 <% layout('layouts/boilerplate') %>
-    <h1 class="text-center">The Camp Ground</h1>
+<link rel="stylesheet" href="/stylesheet/star.css">    
+
+<h1 class="text-center">The Camp Ground</h1>
     
+    <div id="map" class="img-thumbnail border-black" style="height: 45%;" class="mb-3"></div>
+   
     <div class="row">
+        
     <div class="col-6 mt-2">
-    <div class="card mb-3" style="width: 30rem;">
-        <img src="<%= Camp.image %>" class="card-img-top " width="100%" height="400px" alt="<%= Camp.image %>">
+
+    <div class="card mb-3" style="width: 37rem;">
+       
         <div class="card-body">
+            <div id="carouselExample" class="carousel slide">
+                <div class="carousel-inner">
+    
+                <% Camp.images.forEach((img,i)=>{%>    
+                    <div class="carousel-item <%= i===0? 'active' : ''  %>">
+                        <img src="<%=img.url%>" class="d-block w-100 img-fluid " alt="...">
+                    </div>
+                <% }) %>
+                </div>
+                <% if(Camp.images.length!== (1||0) ) {%>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+                <% } %>
+              </div>    
             <h5 class="card-title fw-bolder"><%= Camp.title %></h5>
             <p class="card-text"><%= Camp.description %></p>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Location : <%= Camp.location %></li>
+                <li class="list-group-item">username : <%= Camp.author.username %></li>
                 <li class="list-group-item">Price : <%=Camp.price  %>/hr</li>
-                <li class="list-group-item"><button class="btn btn-info "><a class="text-decoration-none text-white" href="/campgrounds/<%= Camp.id%>/edit">Edit Camp</a></button> <form class="d-inline m-2" action="/campgrounds/<%= Camp.id %>?_method=DELETE" method="post">
+                <% if(currentUser && Camp.author.equals(currentUser._id)) {%>
+                <li class="list-group-item"><button class="btn btn-info "><a class="text-decoration-none text-white" href="/campgrounds/<%= Camp.id%>/edit">Edit Camp</a></button> 
+                    <form class="d-inline m-2" action="/campgrounds/<%= Camp.id %>?_method=DELETE" method="post">
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form></li>
+                <% } %>
               </ul>
         </div>
         
         
       </div>
     </div>
-        <div class="col-6 card mb-5">
+    <% if(currentUser) {%>
+        <div class="col-6 card  mt-2">
             <h2 class="m-2">Leave a Review </h2>
         <form action="/campgrounds/<%= Camp._id %>/reviews" class="needs-validation" method="post" novalidate>
             <div class="m-2">
-            <label for="customRange2" class="form-label m-2" >Rating 0 - 5</label>
-            <input type="range" class="form-range " min="0" max="5" name="review[rating]" id="customRange2"  required>
-            <div class="valid-feedback">
-                Looks good!
-              </div>
+                <fieldset class="starability-basic">
+            
+                    <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
+              
+                    <input type="radio" id="rate1" name="review[rating]" value="1" />
+                    <label for="rate1">1 star.</label>
+              
+                    <input type="radio" id="rate2" name="review[rating]" value="2" />
+                    <label for="rate2">2 stars.</label>
+              
+                    <input type="radio" id="rate3" name="review[rating]" value="3" />
+                    <label for="rate3">3 stars.</label>
+              
+                    <input type="radio" id="rate4" name="review[rating]" value="4" />
+                    <label for="rate4">4 stars.</label>
+              
+                    <input type="radio" id="rate5" name="review[rating]" value="5" />
+                    <label for="rate5">5 stars.</label>
+              
+                    <span class="starability-focus-ring"></span>
+                  </fieldset>
             </div>
             <div class="form-floating mx-2">
                 <textarea class="form-control " style="height: 160px;" placeholder="Leave a Review here" name="review[body]" required  id="floatingTextarea"></textarea>
@@ -39,19 +86,27 @@
               </div>
             <button class="btn mt-2 btn-success mx-2" type="submit">Submit</button>
         </form>
+        <% } %>
             <% for(let review of Camp.reviews) { %>
                 <div class="card mb-3 m-2">
                     <div class="card-body">
-                        <h5 class="card-title">Rating : <%=review.rating  %></h5>
+                        <p><strong><%=review.author.username%></strong></p>
+                        <p class="starability-result" data-rating="<%=review.rating %>"></p>
                         <p class="card-text">
                             <%= review.body %>
                         </p>
-                        <form action="/campgrounds/<%= Camp._id %>/review/<%= review._id %>?_method=DELETE" method="post">
+                        <% if(currentUser && review.author.equals(currentUser._id) ) {%>
+                        <form action="/campgrounds/<%= Camp._id %>/reviews/<%= review._id %>?_method=DELETE" method="post">
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
+                        <% } %>
                     </div>
                 </div>
                 <% } %>
         </div>
     </div>
     
+    <script>
+        const  maptilerAPI = '<%-process.env.MAPTILER_KEY%>';
+        const campground = <%-JSON.stringify(Camp)%>;
+    </script>

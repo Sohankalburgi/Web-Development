@@ -1,0 +1,11 @@
+.container{
+    width: 100px;
+    height: 100px;
+}
+
+.ColorBoxGrid{
+    width: 500px;
+    border: white 1pt solid;
+    flex-wrap: wrap;
+    display: flex;
+}

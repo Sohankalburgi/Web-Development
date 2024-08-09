@@ -3,7 +3,7 @@
     <h1 class="text-center">New Campground</h1>
     <div class="col-6 offset-3">
      
-    <form class="m-4 g-3 needs-validation" action="/campgrounds" method="post" novalidate>
+    <form class="m-4 g-3 needs-validation" action="/campgrounds" method="post" enctype="multipart/form-data" novalidate>
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
           <input type="text" class="form-control" id="title" name="campground[title]" required>
@@ -18,13 +18,19 @@
             Looks good!
           </div>
         </div>
+        
         <div class="mb-3">
+          <label for="image" class="form-label">Images</label>
+          <input class="form-control" type="file" id="image" name="image" multiple>
+        </div>
+
+        <!-- <div class="mb-3">
             <label for="image" class="form-label">Images</label>
             <input type="text" class="form-control" id="image" name="campground[image]" required>
             <div class="valid-feedback">
               Looks good!
             </div>
-        </div>
+        </div> -->
         <div class="input-group mb-3">
             <span class="input-group-text">PRICE : $</span>
             <input type="text" class="form-control" name="campground[price]" required aria-label="Amount (to the nearest dollar)">

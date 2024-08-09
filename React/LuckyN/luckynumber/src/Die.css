@@ -1,0 +1,23 @@
+.die{
+    width: 5%;
+    text-align: center;
+    height: 10%;
+    border: 5pt solid rgb(228, 0, 0);
+    margin-inline: 1%;
+    border-radius: 25%;
+    display: inline-block;
+    color: aliceblue;
+    background-image: radial-gradient(red 20%, rgb(192, 61, 61) 50%, rgb(194, 160, 157) 90%);
+}
+
+.dice{
+    display: flex;
+    justify-content: center ;
+    padding: 5%;
+    background-position: center;
+    background-size: contain;
+    border: 1pt solid black;
+    border-radius: 50%;
+    margin: 5%;
+    background-image: url('https://d29fhpw069ctt2.cloudfront.net/clipart/105625/preview/luckyseven_preview_ee89.png');
+}
